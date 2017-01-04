@@ -21,7 +21,7 @@ namespace TecanMCA_PipetteDiagnostic
             lst = "(" + lst.Substring(1) + ")";
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -71,7 +71,7 @@ namespace TecanMCA_PipetteDiagnostic
             lst = "(" + lst.Substring(1) + ")";
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -130,7 +130,7 @@ namespace TecanMCA_PipetteDiagnostic
             }
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -171,7 +171,7 @@ namespace TecanMCA_PipetteDiagnostic
             }
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -219,7 +219,7 @@ namespace TecanMCA_PipetteDiagnostic
             }
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -242,7 +242,7 @@ namespace TecanMCA_PipetteDiagnostic
         public static bool checkMicronicRackExist(string rack_barcode)
         {
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -264,7 +264,7 @@ namespace TecanMCA_PipetteDiagnostic
         public static void loadMicronicLayout(string rack_barcode, Dictionary<string, CSample> tubeBarcodes)
         {
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -292,7 +292,7 @@ namespace TecanMCA_PipetteDiagnostic
         public static void loadLayout(string layout, Dictionary<string, CPlateWell> plateWells)
         {
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -323,7 +323,7 @@ namespace TecanMCA_PipetteDiagnostic
         public static void addSamplesToPlate(string platform, string layout, Int32 number, Int32 volume, Int32 concentration, Dictionary<string, CPlateWell> plateWells)
         {
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=muba.i-kmb.de;" +
+                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
                                        "Initial Catalog=ibdbase;");
 
             myConnection.Open();

@@ -1039,6 +1039,30 @@ namespace TecanMCA_PipetteDiagnostic
                 case 'H':
                     i_row = 8;
                     break;
+                case 'I':
+                    i_row = 9;
+                    break;
+                case 'J':
+                    i_row = 10;
+                    break;
+                case 'K':
+                    i_row = 11;
+                    break;
+                case 'L':
+                    i_row = 12;
+                    break;
+                case 'M':
+                    i_row = 13;
+                    break;
+                case 'N':
+                    i_row = 14;
+                    break;
+                case 'O':
+                    i_row = 15;
+                    break;
+                case 'P':
+                    i_row = 16;
+                    break;
                 default:
                     i_row = 0;
                     break;

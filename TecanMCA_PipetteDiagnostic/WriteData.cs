@@ -162,13 +162,17 @@ namespace TecanMCA_PipetteDiagnostic
                                 m_plate_384well_2_layout = plate_tokenized[1];
                                 m_plate_384well_2_number = int.Parse(plate_tokenized[2]);
                             }
-                            else if (tokenized[1] == "target_volume")
+                            else if (tokenized[1] == "target_96well_volume")
                             {
                                 m_target_96well_volume = int.Parse(tokenized[2].Trim());
                             }
-                            else if (tokenized[1] == "target_concentration")
+                            else if (tokenized[1] == "target_96well_concentration")
                             {
                                 m_target_96well_concentration = int.Parse(tokenized[2].Trim());
+                            }
+                            else if (tokenized[1] == "target_384well_volume")
+                            {
+                                m_target_384well_volume = int.Parse(tokenized[2].Trim());
                             }
                             else if (tokenized[1] == "normalize")
                             {
