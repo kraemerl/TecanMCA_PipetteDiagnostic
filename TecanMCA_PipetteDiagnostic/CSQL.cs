@@ -320,7 +320,7 @@ namespace TecanMCA_PipetteDiagnostic
             myReader.Close();
         }
 
-        public static void addSamplesToPlate(string platform, string layout, Int32 number, Int32 volume, Int32 concentration, Dictionary<string, CPlateWell> plateWells)
+        public static void addSamplesToPlate(string platform, string layout, Int32 number, Int32 volume, Int32 concentration, Dictionary<string, CPlateWell> plateWells,Boolean reduceVolume)
         {
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
                                        "Password=tecan;Data Source=ukshikmb-sw049;" +
@@ -357,22 +357,26 @@ namespace TecanMCA_PipetteDiagnostic
                     myCommand.ExecuteNonQuery();
                 }
 
-                foreach (string key in plateWells.Keys)
+                if (reduceVolume)
                 {
-                    myCommand.CommandText = " INSERT INTO plate_sample (plate_id, row, col, sample_id)" +
-                                        " VALUES (" + plate_id + "," + ScanReport.rowToNumber(plateWells[key].getRow()).ToString() + "," + plateWells[key].getCol() + "," + plateWells[key].getSample() + ")";
-                    myCommand.ExecuteNonQuery();
-                    using (SqlCommand cmd = new SqlCommand("spu_sample_reduce_volume", myConnection))
+                    foreach (string key in plateWells.Keys)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@sample_id", SqlDbType.Int).Value = plateWells[key].getSample();
-                        cmd.Parameters.Add("@used_vol", SqlDbType.Decimal, 10).Value = plateWells[key].getSampleVol();
-                        cmd.Transaction = trans;
-                        cmd.ExecuteNonQuery();
-                        cmd.Dispose();
-                        Thread.Sleep(50);
+                        myCommand.CommandText = " INSERT INTO plate_sample (plate_id, row, col, sample_id)" +
+                                            " VALUES (" + plate_id + "," + ScanReport.rowToNumber(plateWells[key].getRow()).ToString() + "," + plateWells[key].getCol() + "," + plateWells[key].getSample() + ")";
+                        myCommand.ExecuteNonQuery();
+                        using (SqlCommand cmd = new SqlCommand("spu_sample_reduce_volume", myConnection))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@sample_id", SqlDbType.Int).Value = plateWells[key].getSample();
+                            cmd.Parameters.Add("@used_vol", SqlDbType.Decimal, 10).Value = plateWells[key].getSampleVol();
+                            cmd.Transaction = trans;
+                            cmd.ExecuteNonQuery();
+                            cmd.Dispose();
+                            Thread.Sleep(50);
+                        }
                     }
                 }
+                
                 using (SqlCommand cmd = new SqlCommand("spu_plate_track_location", myConnection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;

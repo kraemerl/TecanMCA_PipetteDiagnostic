@@ -4,6 +4,6 @@
     <StartArguments>scan_report C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\variables.csv C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\source_eppi_barcode.csv C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\lastJobInfo.txt C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\worklist.gwl</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartArguments>write_data C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\variables.csv C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\lastJobInfo.txt C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\worklist.gwl C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\Backup</StartArguments>
+    <StartArguments>scan_report C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\variables.csv C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\source_eppi_barcode.csv C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\lastJobInfo.txt C:\Lars\Git\C#_projects\TecanMCA_PipetteDiagnostic\Data\worklist.gwl</StartArguments>
   </PropertyGroup>
 </Project>

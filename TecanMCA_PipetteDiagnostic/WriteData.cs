@@ -204,7 +204,8 @@ namespace TecanMCA_PipetteDiagnostic
                     m_plate_96well_number,
                     m_target_96well_volume,
                     m_target_96well_concentration,
-                    new96WellDict
+                    new96WellDict,
+                    true
                 );
                 if (m_plate_384well_1 != "")
                 {
@@ -214,7 +215,8 @@ namespace TecanMCA_PipetteDiagnostic
                         m_plate_384well_1_number,
                         m_target_384well_volume,
                         m_target_96well_concentration,
-                        new384WellDict
+                        new384WellDict,
+                        false
                     );
                 }
                 if (m_plate_384well_2 != "")
@@ -225,7 +227,8 @@ namespace TecanMCA_PipetteDiagnostic
                         m_plate_384well_2_number,
                         m_target_384well_volume,
                         m_target_96well_concentration,
-                        new384WellDict
+                        new384WellDict,
+                        false
                     );
                 }
             }

@@ -288,7 +288,7 @@
             this.txt384wellTargetVolume.Name = "txt384wellTargetVolume";
             this.txt384wellTargetVolume.Size = new System.Drawing.Size(43, 20);
             this.txt384wellTargetVolume.TabIndex = 9;
-            this.txt384wellTargetVolume.Text = "5";
+            this.txt384wellTargetVolume.Text = "2";
             this.txt384wellTargetVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt384wellTargetVolume.TextChanged += new System.EventHandler(this.txt384wellTargetVolume_TextChanged);
             this.txt384wellTargetVolume.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt384wellTargetVolume_KeyPress);
@@ -311,7 +311,7 @@
             this.txt96wellTargetVolume.Name = "txt96wellTargetVolume";
             this.txt96wellTargetVolume.Size = new System.Drawing.Size(43, 20);
             this.txt96wellTargetVolume.TabIndex = 7;
-            this.txt96wellTargetVolume.Text = "45";
+            this.txt96wellTargetVolume.Text = "25";
             this.txt96wellTargetVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt96wellTargetVolume.TextChanged += new System.EventHandler(this.txt96wellTargetVolume_TextChanged);
             this.txt96wellTargetVolume.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt96wellTargetVolume_KeyPress);
