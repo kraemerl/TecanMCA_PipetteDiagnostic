@@ -565,7 +565,7 @@ namespace TecanMCA_PipetteDiagnostic
                                         streamWriter.WriteLine("W3;");
                                     }
                                 }
-                                if (++tip == 8)
+                                if (++tip == 4)
                                 {
                                     tip = 0;
                                     streamWriter.WriteLine("B;");
@@ -605,7 +605,7 @@ namespace TecanMCA_PipetteDiagnostic
                                     streamWriter.WriteLine("W3;");
                                 }
                             }
-                            if (++tip == 8)
+                            if (++tip == 4)
                             {
                                 tip = 0;
                                 streamWriter.WriteLine("B;");
@@ -672,11 +672,11 @@ namespace TecanMCA_PipetteDiagnostic
                             streamWriter.WriteLine("D;DW96well;;96 Well HalfDeepWell;" + sourceBarcodesDict[key].getRackPos() + ";;" + mixVolume + ";DNA;;" + Convert.ToInt16(Math.Pow(2, tip)) + ";;;");
                             streamWriter.WriteLine("W;");
 
-                            if (++tip == 8)
+                            if (++tip == 4)
                             {
                                 tip = 0;
                                 streamWriter.WriteLine("B;");
-                                for (int tipWash = 0; tipWash < 8; tipWash++)
+                                for (int tipWash = 0; tipWash < 4; tipWash++)
                                 {
                                     streamWriter.WriteLine("A;NaClO;;Trough 100ml;" + (tipWash + 1) + ";;" + maxAspirate.ToString("R", CultureInfo.InvariantCulture) + ";Decon Mix In Trough Detect;;" + Convert.ToInt16(Math.Pow(2, tipWash)) + ";;;");
                                     streamWriter.WriteLine("D;NaClO;;Trough 100ml;" + (tipWash + 1) + ";;" + maxAspirate.ToString("R", CultureInfo.InvariantCulture) + ";Decon Mix In Trough Detect;;" + Convert.ToInt16(Math.Pow(2, tipWash)) + ";;;");
@@ -734,11 +734,11 @@ namespace TecanMCA_PipetteDiagnostic
                             }
                             streamWriter.WriteLine("W;");
 
-                            if (++tip == 8)
+                            if (++tip == 4)
                             {
                                 tip = 0;
                                 streamWriter.WriteLine("B;");
-                                for (int tipWash = 0; tipWash < 8; tipWash++)
+                                for (int tipWash = 0; tipWash < 4; tipWash++)
                                 {
                                     streamWriter.WriteLine("A;NaClO;;Trough 100ml;" + (tipWash + 1) + ";;" + maxAspirate.ToString("R", CultureInfo.InvariantCulture) + ";Decon Mix In Trough Detect;;" + Convert.ToInt16(Math.Pow(2, tipWash)) + ";;;");
                                     streamWriter.WriteLine("D;NaClO;;Trough 100ml;" + (tipWash + 1) + ";;" + maxAspirate.ToString("R", CultureInfo.InvariantCulture) + ";Decon Mix In Trough Detect;;" + Convert.ToInt16(Math.Pow(2, tipWash)) + ";;;");

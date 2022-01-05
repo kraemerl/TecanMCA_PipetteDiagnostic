@@ -21,7 +21,7 @@ namespace TecanMCA_PipetteDiagnostic
             lst = "(" + lst.Substring(1) + ")";
 
             SqlConnection myConnection = new SqlConnection("User Id=tecan;" +
-                                       "Password=tecan;Data Source=ukshikmb-sw049;" +
+                                       "Password=tecan;Data Source=ibdbase.i-kmb.de;" +
                                        "Initial Catalog=ibdbase;");
             myConnection.Open();
 
@@ -139,15 +139,9 @@ namespace TecanMCA_PipetteDiagnostic
                                                     " where plate_id = (" +
                                                     "    select p.plate_id" +
                                                     "    from plate p" +
-                                                    "    join master_plate mp on p.master_plate_name_id = mp.master_plate_name_id" +
-                                                    "    where mp.plate_type_name_id = '96DNA'" +
-                                                    "    and p.master_plate_name_id = '" + tokenized[1] + "'" +
-                                                    "    and p.number = " + int.Parse(tokenized[2]) +
-                                                    "    and p.plate_platform_id = (" +
-                                                    "        select plate_platform_id" +
-                                                    "        from plate_platform" +
-                                                    "        where plate_platform_name_id = '" + tokenized[0] + "'" +
-                                                    "    )" +
+                                                    "    join plate_layout pl on p.plate_layout_id = pl.plate_layout_id" +
+                                                    "    where p.barcode = '" + plate_barcode + "'" +
+                                                    "    and pl.plate_type_id = (select plate_type_id from plate_type where plate_type_name_id = '96DNA')" +
                                                     ")"
                                                 , myConnection);
 
@@ -180,16 +174,10 @@ namespace TecanMCA_PipetteDiagnostic
                                                     " where plate_id = (" +
                                                     "    select p.plate_id" +
                                                     "    from plate p" +
-                                                    "    join master_plate mp on p.master_plate_name_id = mp.master_plate_name_id" +
-                                                    "    where mp.plate_type_name_id = '384DNA'" +
-                                                    "    and p.master_plate_name_id = '" + tokenized[1] + "'" +
-                                                    "    and p.number = " + int.Parse(tokenized[2]) +
-                                                    "    and p.plate_platform_id = (" +
-                                                    "        select plate_platform_id" +
-                                                    "        from plate_platform" +
-                                                    "        where plate_platform_name_id = '" + tokenized[0] + "'" +
-                                                    "    )" +
-                                                    " )"
+                                                    "    join plate_layout pl on p.plate_layout_id = pl.plate_layout_id" +
+                                                    "    where p.barcode = '" + plate_barcode + "'" +
+                                                    "    and pl.plate_type_id = (select plate_type_id from plate_type where plate_type_name_id = '384DNA')" +
+                                                    ")"
                                                 , myConnection);
 
             if (int.Parse(myCommand.ExecuteScalar().ToString()) >= 1)
@@ -224,9 +212,9 @@ namespace TecanMCA_PipetteDiagnostic
             myConnection.Open();
 
             SqlCommand myCommand = new SqlCommand("select count(*) as num" +
-                                                    " from sub_plate" +
-                                                    " where master_plate_name_id = '" + tokenized384[1] + "'" +
-                                                    " and sub_plate_name_id != '" + tokenized96[1] + "'"
+                                                    " from plate_layout_sublayout" +
+                                                    " WHERE plate_layout_id = (select plate_layout_id from plate_layout where name = '" + tokenized384[1] + "')" +
+                                                    " AND sub_layout_id != (select plate_layout_id from plate_layout where name = '" + tokenized96[1] + "')"
                                                 , myConnection);
 
             if (int.Parse(myCommand.ExecuteScalar().ToString()) > 0)
@@ -297,9 +285,10 @@ namespace TecanMCA_PipetteDiagnostic
             myConnection.Open();
 
             SqlDataReader myReader = null;
-            SqlCommand myCommand = new SqlCommand("SELECT row, col, patient_id" +
-                                                " FROM master_plate_well" +
-                                                " WHERE master_plate_name_id = '" + layout + "'" +
+            SqlCommand myCommand = new SqlCommand("SELECT r.row_c as row, col, patient_id" +
+                                                " FROM plate_layout_patient plp" +
+                                                " JOIN plate_row_char2int r on plp.row = r.row_i" +
+                                                " WHERE plate_layout_id = (select plate_layout_id from plate_layout where name = '" + layout + "')" +
                                                 " AND patient_id NOT IN (" +
                                                 "   SELECT patient_id" +
                                                 "   FROM patient_iscontrol" +
@@ -336,7 +325,7 @@ namespace TecanMCA_PipetteDiagnostic
             {
                 SqlCommand myCommand = new SqlCommand("SELECT plate_id" +
                                                     " FROM plate" +
-                                                    " WHERE master_plate_name_id = '" + layout + "'" +
+                                                    " WHERE plate_layout_id = (select plate_layout_id from plate_layout where name = '" + layout + "')" +
                                                     " AND number = " + number +
                                                     " AND plate_platform_id = (" +
                                                     "   SELECT plate_platform_id" +
@@ -377,12 +366,10 @@ namespace TecanMCA_PipetteDiagnostic
                     }
                 }
                 
-                using (SqlCommand cmd = new SqlCommand("spu_plate_track_location", myConnection))
+                using (SqlCommand cmd = new SqlCommand("spu_plate_track_location_by_plate_id", myConnection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@plate_platform_name_id", SqlDbType.Char, 4).Value = platform;
-                    cmd.Parameters.Add("@master_plate_name_id", SqlDbType.VarChar, 10).Value = layout;
-                    cmd.Parameters.Add("@number", SqlDbType.Int).Value = number;
+                    cmd.Parameters.Add("@plate_id", SqlDbType.Int).Value = plate_id;
                     cmd.Parameters.Add("@event_id", SqlDbType.Int).Value = 24;
                     cmd.Parameters.Add("@done_by", SqlDbType.VarChar, 25).Value = "tecan";
                     cmd.Parameters.Add("@tracking_location_id", SqlDbType.Int).Direction = ParameterDirection.Output;
